@@ -70,6 +70,9 @@ init
         case 8876032:
             version = "Discord 1.51";
             break;
+        case 9183232:
+            version = "Steam 1.00";
+            break;
         case 9383936:
             version = "Steam 1.51";
             break;
