@@ -1,29 +1,15 @@
 state("BurnoutParadise")
 {
     bool loading : 0x00D007B8;
-    bool windowFocused : 0x00CF8344;
-
     byte carState : 0x00BBFA5C;
-
-    byte raceWins : 0x002631CC, 0x44, 0x180;
-    byte markedManWins : 0x002631CC, 0x44, 0x1A0;
-    byte roadRageWins : 0x002631CC, 0x44, 0x18C;
-    byte stuntRunWins : 0x002631CC, 0x44, 0x19C;
-    byte burningRouteWins : 0x002631CC, 0x44, 0x194;
+    byte victoryState : 0x0019D554, 0x150, 0x6C, 0x130, 0x5540;
 }
 
 state("BurnoutPR")
 {
     bool loading : 0x01096A1C;
-    bool windowFocused : 0x00F45D8C;
-
     byte carState : 0x00EFE7E8;
-
-    byte raceWins : 0x04408D74, 0xFC, 0x20, 0x180;
-    byte markedManWins : 0x04408D74, 0xFC, 0x20, 0x1A0;
-    byte roadRageWins : 0x04408D74, 0xFC, 0x20, 0x18C;
-    byte stuntRunWins : 0x04408D74, 0xFC, 0x20, 0x19C;
-    byte burningRouteWins : 0x04408D74, 0xFC, 0x20, 0x194;
+    byte victoryState : 0x00F98134, 0x3C, 0x40, 0xD060;
 }
 
 start
@@ -33,10 +19,7 @@ start
 
 split
 {
-    var previousWins = old.raceWins + old.markedManWins + old.roadRageWins + old.stuntRunWins + old.burningRouteWins;
-    var currentWins = current.raceWins + current.markedManWins + current.roadRageWins + current.stuntRunWins + current.burningRouteWins;
-
-    return current.windowFocused && currentWins > previousWins;
+    return old.victoryState != current.victoryState && current.victoryState == 1;
 }
 
 isLoading
