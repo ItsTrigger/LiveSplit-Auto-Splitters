@@ -7,7 +7,7 @@ state("speed", "EU")
     byte trackLaps : 0x0038A30C;
     float trackProgress : 0x00336194, 0x44;
 
-    int gameState : 0x00335784, 0x8, 0xF4, 0x4, 0x4;
+    byte loading : 0x00335DF4, 0x0;
 }
 
 state("speed", "US")
@@ -19,7 +19,7 @@ state("speed", "US")
     byte trackLaps : 0x0038A31C;
     float trackProgress : 0x0033619C, 0x44;
 
-    int gameState : 0x0033578C, 0x8, 0xF4, 0x4, 0x4;
+    byte loading : 0x00335DFC, 0x0;
 }
 
 init
@@ -47,7 +47,7 @@ start
 
 split
 {
-    if (current.gameState == 0 || current.trackId == 11) { return false; }
+    if (current.loading != 244 || current.trackId == 11) { return false; }
 
     if ((current.trackId >= 1001 && current.trackId <= 1008) || (current.trackId >= 1301 && current.trackId <= 1308))
     {
@@ -59,5 +59,5 @@ split
 
 isLoading
 {
-    return current.gameState == 0;
+    return current.loading != 244;
 }
