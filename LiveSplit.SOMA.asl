@@ -28,28 +28,22 @@ state("soma_nosteam", "NoSteam 1.00")
     string50 map : 0x0077EBB0, 0x118, 0x168, 0x0;
 }
 
-state("soma", "GOG 1.51")
+state("soma", "GOG 1.61")
 {
-    bool loading : 0x00792DD0, 0xC48, 0x3E8, 0x1D8, 0x1D0, 0x190, 0x38, 0x60;
-    string50 map : 0x0078D560, 0x130, 0x168, 0x0;
+    bool loading : 0x00797E50, 0xB20, 0x2970, 0x60;
+    string50 map : 0x007925E0, 0x148, 0x168, 0x0;
 }
 
-state("soma", "Steam 1.51")
+state("soma", "Steam 1.61")
 {
-    bool loading : 0x0080D740, 0x890, 0x0, 0xE0, 0x120, 0x190, 0x38, 0x60;
-    string50 map : 0x0080D740, 0x130, 0x168, 0x0;
+    bool loading : 0x0081A030, 0xB20, 0x2970, 0x60;
+    string50 map : 0x008147C0, 0x148, 0x168, 0x0;
 }
 
-state("soma", "Discord 1.51")
+state("soma_nosteam", "NoSteam 1.61")
 {
-    bool loading : 0x0078D560, 0x890, 0x0, 0xE0, 0x120, 0x190, 0x38, 0x60;
-    string50 map : 0x0078D560, 0x130, 0x168, 0x0;
-}
-
-state("soma_nosteam", "NoSteam 1.51")
-{
-    bool loading : 0x00792DD0, 0xC48, 0x3E8, 0x1D8, 0x1D0, 0x190, 0x38, 0x60;
-    string50 map : 0x0078D560, 0x130, 0x168, 0x0;
+    bool loading : 0x00797E50, 0xB20, 0x2970, 0x60;
+    string50 map : 0x007925E0, 0x148, 0x168, 0x0;
 }
 
 init
@@ -64,17 +58,14 @@ init
         case 8679424:
             version = name == "soma.exe" ? "GOG 1.00" : "NoSteam 1.00";
             break;
-        case 8871936:
-            version = name == "soma.exe" ? "GOG 1.51" : "NoSteam 1.51";
-            break;
-        case 8876032:
-            version = "Discord 1.51";
+        case 8892416:
+            version = name == "soma.exe" ? "GOG 1.61" : "NoSteam 1.61";
             break;
         case 9183232:
             version = "Steam 1.00";
             break;
-        case 9383936:
-            version = "Steam 1.51";
+        case 9416704:
+            version = "Steam 1.61";
             break;
         default:
             break;
