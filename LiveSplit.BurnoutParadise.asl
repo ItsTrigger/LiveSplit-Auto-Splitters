@@ -2,7 +2,7 @@ state("BurnoutParadise")
 {
     bool loading : 0x00D007B8;
     byte carState : 0x00BBFA5C;
-    byte victoryState : 0x0019D554, 0x150, 0x6C, 0x130, 0x5540;
+    byte victoryState : 0x00C11FA0, 0x3C, 0x40, 0xC2A0;
 }
 
 state("BurnoutPR")
