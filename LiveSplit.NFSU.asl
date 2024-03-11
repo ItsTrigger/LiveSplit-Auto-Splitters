@@ -54,7 +54,7 @@ split
         return current.trackProgress > old.trackProgress && current.trackProgress >= current.trackLaps;
     }
 
-    return current.trackProgress > old.trackProgress && current.trackProgress >= 1;
+    return current.trackProgress > old.trackProgress && old.trackProgress > 0.95 && current.trackProgress >= 1;
 }
 
 isLoading
