@@ -20,7 +20,7 @@ startup
     settings.Add("WB.Missions.QD_Q06_Mission_G",        true, "The Visions",                    "MISSIONS");
     settings.Add("WB.Missions.QD_Q07_Mission_H",        true, "Red Meadow Research Facility",   "MISSIONS");
     settings.Add("WB.Missions.QD_Q08_Mission_F",        true, "The Deep Zone Crossing",         "MISSIONS");
-    settings.Add("WB.Missions.QD_Q09_Mission_A",        true, "Explore the Deep Zone",          "MISSIONS");
+    settings.Add("WB.Missions.QD_Q09_SR_Mission_A",     true, "Explore the Deep Zone",          "MISSIONS");
     settings.Add("WB.Missions.QD_Q10_Mission_E",        true, "The Anomaly Barricade",          "MISSIONS");
     settings.Add("CREDITS",                             true, "The End of the Road",            "MISSIONS");
 
