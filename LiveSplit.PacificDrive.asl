@@ -48,22 +48,20 @@ startup
 init
 {
     var scan = new SignatureScanner(game, game.MainModule.BaseAddress, game.MainModule.ModuleMemorySize);
-    var syncLoadTarget = new SigScanTarget(5, "89 43 60 8B 05 ?? ?? ?? ??") { OnFound = (p, s, ptr) => ptr + 0x4 + game.ReadValue<int>(ptr) };
-    var syncLoadCount = scan.Scan(syncLoadTarget);
     var gameEngineTarget = new SigScanTarget(3, "48 39 35 ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 48 8B 0D") { OnFound = (p, s, ptr) => ptr + 0x4 + game.ReadValue<int>(ptr) };
     var gameEngine = scan.Scan(gameEngineTarget);
     var fNamePoolTarget = new SigScanTarget(13, "89 5C 24 ?? 89 44 24 ?? 74 ?? 48 8D 15") { OnFound = (p, s, ptr) => ptr + 0x4 + game.ReadValue<int>(ptr) };
     var fNamePool = scan.Scan(fNamePoolTarget);
 
-    if(syncLoadCount == IntPtr.Zero || gameEngine == IntPtr.Zero || fNamePool == IntPtr.Zero)
+    if(gameEngine == IntPtr.Zero || fNamePool == IntPtr.Zero)
     {
         throw new Exception("One or more base pointers not found, retrying...");
     }
 
 	vars.Watchers = new MemoryWatcherList
     {
-        new MemoryWatcher<int>(new DeepPointer(syncLoadCount)) { Name = "SyncLoadCount" },
         new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x40C)) { Name = "StateFlags" },
+        new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xDE8, 0x410)) { Name = "HoldLoadingScreen" },
         new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xDE8, 0x330, 0xA0, 0x118)) { Name = "CompletedMissions" },
         new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x330, 0xA0, 0x120)) { Name = "CompletedMissionsCount" },
         new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
@@ -138,5 +136,9 @@ split
 
 isLoading
 {
-    return vars.Watchers["SyncLoadCount"].Current > 0;
+    return vars.Watchers["StateFlags"].Current == 6
+        || vars.Watchers["StateFlags"].Current == 12
+        || vars.Watchers["StateFlags"].Current == 20
+        || vars.Watchers["StateFlags"].Current == 36
+        || vars.Watchers["HoldLoadingScreen"].Current == true;
 }
