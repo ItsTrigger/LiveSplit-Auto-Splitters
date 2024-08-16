@@ -60,10 +60,10 @@ init
 
 	vars.Watchers = new MemoryWatcherList
     {
-        new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x40C)) { Name = "StateFlags" },
-        new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xDE8, 0x410)) { Name = "HoldLoadingScreen" },
-        new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xDE8, 0x330, 0xA0, 0x118)) { Name = "CompletedMissions" },
-        new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x330, 0xA0, 0x120)) { Name = "CompletedMissionsCount" },
+        new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x404)) { Name = "StateFlags" },
+        new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xDE8, 0x408)) { Name = "HoldLoadingScreen" },
+        new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xDE8, 0x328, 0xA0, 0x118)) { Name = "CompletedMissions" },
+        new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x328, 0xA0, 0x120)) { Name = "CompletedMissionsCount" },
         new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
         new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2FA)) { Name = "FullscreenWidgetsVisible" }
     };
