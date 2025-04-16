@@ -58,15 +58,77 @@ init
         throw new Exception("One or more base pointers not found, retrying...");
     }
 
-	vars.Watchers = new MemoryWatcherList
+    var size = modules.First().ModuleMemorySize;
+    version = size.ToString();
+
+    switch(size)
     {
-        new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xD28, 0x414)) { Name = "StateFlags" },
-        new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xD28, 0x418)) { Name = "HoldLoadingScreen" },
-        new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xD28, 0x338, 0xA8, 0x118)) { Name = "CompletedMissions" },
-        new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xD28, 0x338, 0xA8, 0x120)) { Name = "CompletedMissionsCount" },
-        new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xD28, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
-        new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xD28, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2FA)) { Name = "FullscreenWidgetsVisible" }
-    };
+        case 87736320:
+            // Steam 1.5.0 - #6981334661982595187
+            vars.Watchers = new MemoryWatcherList
+            {
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x40C)) { Name = "StateFlags" },
+                new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xDE8, 0x410)) { Name = "HoldLoadingScreen" },
+                new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xDE8, 0x330, 0xA0, 0x118)) { Name = "CompletedMissions" },
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x330, 0xA0, 0x120)) { Name = "CompletedMissionsCount" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2FA)) { Name = "FullscreenWidgetsVisible" }
+            };
+
+            break;
+        case 87953408:
+            // Steam 1.6.5 - #6093375766870524612
+            vars.Watchers = new MemoryWatcherList
+            {
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x404)) { Name = "StateFlags" },
+                new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xDE8, 0x408)) { Name = "HoldLoadingScreen" },
+                new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xDE8, 0x328, 0xA0, 0x118)) { Name = "CompletedMissions" },
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x328, 0xA0, 0x120)) { Name = "CompletedMissionsCount" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2FA)) { Name = "FullscreenWidgetsVisible" }
+            };
+
+            break;
+        case 88068096:
+            // Steam 1.7.4 - #4785108981033108502
+            vars.Watchers = new MemoryWatcherList
+            {
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x404)) { Name = "StateFlags" },
+                new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xDE8, 0x408)) { Name = "HoldLoadingScreen" },
+                new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xDE8, 0x328, 0xA8, 0x118)) { Name = "CompletedMissions" },
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xDE8, 0x328, 0xA8, 0x120)) { Name = "CompletedMissionsCount" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xDE8, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2FA)) { Name = "FullscreenWidgetsVisible" }
+            };
+
+            break;
+        case 94232576:
+            // Steam 1.8.3 - #98089392166291947
+            vars.Watchers = new MemoryWatcherList
+            {
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xD28, 0x414)) { Name = "StateFlags" },
+                new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xD28, 0x418)) { Name = "HoldLoadingScreen" },
+                new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xD28, 0x338, 0xA8, 0x118)) { Name = "CompletedMissions" },
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xD28, 0x338, 0xA8, 0x120)) { Name = "CompletedMissionsCount" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xD28, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xD28, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2FA)) { Name = "FullscreenWidgetsVisible" }
+            };
+
+            break;
+        default:
+            // Steam 1.9.1 - #6024366951373330519
+            vars.Watchers = new MemoryWatcherList
+            {
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xD28, 0x414)) { Name = "StateFlags" },
+                new MemoryWatcher<bool>(new DeepPointer(gameEngine, 0xD28, 0x418)) { Name = "HoldLoadingScreen" },
+                new MemoryWatcher<long>(new DeepPointer(gameEngine, 0xD28, 0x338, 0xB0, 0x120)) { Name = "CompletedMissions" },
+                new MemoryWatcher<int>(new DeepPointer(gameEngine, 0xD28, 0x338, 0xB0, 0x128)) { Name = "CompletedMissionsCount" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xD28, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2F9)) { Name = "MenuOpen" },
+                new MemoryWatcher<byte>(new DeepPointer(gameEngine, 0xD28, 0x38, 0x0, 0x30, 0x2B0, 0x390, 0x2FA)) { Name = "FullscreenWidgetsVisible" }
+            };
+
+            break;
+    }
     
     vars.FNameToString = (Func<ulong, string>)(fName =>
     {
